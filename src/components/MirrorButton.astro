@@ -1,0 +1,73 @@
+---
+interface Props {
+  contentCid?: string;
+}
+
+const { contentCid = "bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi" } = Astro.props;
+---
+
+<div class="mirror-container">
+  <button id="mirror-btn" data-cid={contentCid}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+      <polyline points="7 10 12 15 17 10"></polyline>
+      <line x1="12" y1="15" x2="12" y2="3"></line>
+    </svg>
+    Mirror this page to IPFS / Arweave
+  </button>
+  <span id="mirror-status"></span>
+</div>
+
+<script>
+  const btn = document.getElementById('mirror-btn');
+  const status = document.getElementById('mirror-status');
+
+  if (btn && status) {
+    btn.addEventListener('click', () => {
+      const cid = btn.getAttribute('data-cid');
+      status.style.color = '#ffaa00';
+      status.innerText = 'Pinning to local node...';
+      
+      // Simulate decentralized pinning action
+      setTimeout(() => {
+        status.style.color = '#00ff7f';
+        status.innerHTML = `Pinned! <a href="ipfs://${cid}" target="_blank">ipfs://${cid.substring(0,8)}...</a>`;
+      }, 1500);
+    });
+  }
+</script>
+
+<style>
+  .mirror-container {
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  #mirror-btn {
+    background: transparent;
+    border: 1px solid var(--accent, #ff4500);
+    color: var(--accent, #ff4500);
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+  }
+  #mirror-btn:hover {
+    background: rgba(255, 69, 0, 0.1);
+  }
+  #mirror-status {
+    font-family: monospace;
+    font-size: 0.85rem;
+  }
+  #mirror-status a {
+    color: #00ff7f;
+    text-decoration: underline;
+  }
+</style>

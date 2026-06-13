@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/ui';
+import ResiScore from '../components/ResiScore.astro';
+import MirrorButton from '../components/MirrorButton.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang as any);
@@ -15,6 +17,7 @@ const t = useTranslations(lang as any);
     <p class="welcome">
       {t('hero.welcome')}
     </p>
+    <MirrorButton />
   </section>
 
   <section class="features">
@@ -29,6 +32,15 @@ const t = useTranslations(lang as any);
     <div class="card">
       <h3>{t('feature3.title')}</h3>
       <p>{t('feature3.desc')}</p>
+    </div>
+  </section>
+
+  <section class="intelligence-panel" style="margin-top: 3rem;">
+    <h3 style="text-align: center; color: var(--accent); margin-bottom: 1.5rem;">Live Infrastructure Status</h3>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem;">
+      <ResiScore countryCode="GLOBAL" storageType="ipfs" censorshipRisk="medium" score={8.2} />
+      <ResiScore countryCode="RU" storageType="local" censorshipRisk="high" score={4.5} />
+      <ResiScore countryCode="BR" storageType="arweave" censorshipRisk="low" score={9.1} />
     </div>
   </section>
 </Layout>

@@ -1,6 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n/ui';
-import CanvasBackground from './CanvasBackground.astro';
+import CanvasBackground from '../components/CanvasBackground.astro';
 
 interface Props {
 	title?: string;
@@ -48,6 +48,7 @@ const dir = lang === 'ar' ? 'rtl' : 'ltr';
         min-height: 100vh;
         display: flex;
         flex-direction: column;
+        user-select: none; /* Make text uncopyable */
       }
       main {
         flex: 1;
@@ -55,6 +56,11 @@ const dir = lang === 'ar' ? 'rtl' : 'ltr';
         max-width: 1200px;
         margin: 0 auto;
         padding: 2rem 1rem;
+        pointer-events: none; /* Let clicks pass through empty space to canvas */
+      }
+      /* Re-enable pointer events for interactive/content elements */
+      header, .card, .intelligence-panel, .tools-grid, a, button, select, p, h1, h2, h3, h4, li {
+        pointer-events: auto;
       }
       a {
         color: var(--accent);
@@ -86,12 +92,20 @@ const dir = lang === 'ar' ? 'rtl' : 'ltr';
         </nav>
       </div>
       <nav class="lang-switcher">
-        <a href="/">EN</a>
-        <a href="/it/">IT</a>
-        <a href="/es/">ES</a>
-        <a href="/pt-br/">PT-BR</a>
-        <a href="/ar/">AR</a>
-        <!-- Altri link verranno aggiunti nel componente LanguageSwitcher -->
+        <select id="lang-select" data-current={lang}>
+          <option value="en">English</option>
+          <option value="zh">中文</option>
+          <option value="ru">Русский</option>
+          <option value="fa">فارسی</option>
+          <option value="ar">العربية</option>
+          <option value="es">Español</option>
+          <option value="it">Italiano</option>
+          <option value="pt-br">Português (BR)</option>
+          <option value="fr">Français</option>
+          <option value="hi">हिन्दी</option>
+          <option value="tr">Türkçe</option>
+          <option value="id">Bahasa Indonesia</option>
+        </select>
       </nav>
     </header>
 		<main>
@@ -99,6 +113,27 @@ const dir = lang === 'ar' ? 'rtl' : 'ltr';
 		</main>
     <CanvasBackground />
     <script>
+      // Gestione cambio lingua mantenendo il percorso corrente
+      const langSelect = document.getElementById('lang-select');
+      if (langSelect) {
+        langSelect.value = langSelect.getAttribute('data-current');
+        langSelect.addEventListener('change', (e) => {
+          const newLang = e.target.value;
+          const currentPath = window.location.pathname;
+          const segments = currentPath.split('/').filter(Boolean);
+          const langs = ['en', 'zh', 'ru', 'fa', 'ar', 'es', 'it', 'pt-br', 'fr', 'hi', 'tr', 'id'];
+          
+          let pathWithoutLang = currentPath;
+          if (segments.length > 0 && langs.includes(segments[0])) {
+            segments.shift();
+            pathWithoutLang = '/' + segments.join('/');
+          }
+          if (!pathWithoutLang.startsWith('/')) pathWithoutLang = '/' + pathWithoutLang;
+          
+          window.location.href = newLang === 'en' ? pathWithoutLang : '/' + newLang + (pathWithoutLang === '/' ? '' : pathWithoutLang);
+        });
+      }
+
       // Semplice registrazione Service Worker per PWA Offline
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
