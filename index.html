@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>痛打落水狗</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a0a;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem 4rem;
+    }
+    #wrap { position: relative; }
+    canvas { display: block; max-width: 100%; }
+    #link-layer { position: absolute; top: 0; left: 0; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <canvas id="c"></canvas>
+    <div id="link-layer"></div>
+  </div>
+  <script type="module" src="/dist/main.js"></script>
+</body>
+</html>

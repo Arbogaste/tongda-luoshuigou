@@ -1,0 +1,16 @@
+{
+  "name": "ResiHub",
+  "short_name": "ResiHub",
+  "description": "The self-mirroring resilience + open-rails hub for creators & SME in BRICS+/emerging markets",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0c10",
+  "theme_color": "#0b0c10",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}
