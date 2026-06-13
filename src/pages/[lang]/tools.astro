@@ -1,0 +1,115 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { languages, useTranslations } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  const paths = Object.keys(languages)
+    .filter(lang => lang !== 'en')
+    .map((lang) => ({ params: { lang } }));
+  return paths;
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as keyof typeof languages);
+---
+
+<Layout title={t('tools.title')}>
+  <section class="tools-header">
+    <h2>{t('tools.title')}</h2>
+    <p>{t('tools.subtitle')}</p>
+  </section>
+
+  <div class="tools-grid">
+    <section class="tool-category">
+      <h3>{t('tools.cat.osint')}</h3>
+      <ul>
+        <li><a href="https://acleddata.com" target="_blank">ACLED</a> - Event data on conflicts & civilian harm</li>
+        <li><a href="https://github.com/sherlock-project/sherlock" target="_blank">Sherlock</a> - Open-source footprinting across 300+ platforms</li>
+        <li><a href="https://github.com/lanmaster53/recon-ng" target="_blank">Recon-ng</a> - Modular community reconnaissance framework</li>
+        <li><a href="https://www.bellingcat.com" target="_blank">Bellingcat</a> - EU-based geolocation & verification workflows</li>
+      </ul>
+    </section>
+
+    <section class="tool-category">
+      <h3>{t('tools.cat.ai')}</h3>
+      <ul>
+        <li><a href="https://github.com/ggerganov/llama.cpp" target="_blank">llama.cpp</a> - Pure community, VC-free local LLM execution</li>
+        <li><a href="https://github.com/deepseek-ai" target="_blank">DeepSeek-R2 / V3</a> - State-of-art open weights MoE (China)</li>
+        <li><a href="https://qwenlm.github.io/" target="_blank">Qwen 3</a> - Multilingual open models ideal for emerging markets (China)</li>
+        <li><a href="https://github.com/PaddlePaddle/PaddleOCR" target="_blank">PaddleOCR</a> - Multilingual document data extraction</li>
+      </ul>
+    </section>
+
+    <section class="tool-category">
+      <h3>{t('tools.cat.crypto')}</h3>
+      <ul>
+        <li><a href="https://docs.x402.org" target="_blank">x402 Foundation</a> - Machine-to-machine micropayments</li>
+        <li><a href="https://brics-pay.com" target="_blank">BRICS Pay</a> - Decentralized cross-border settlement</li>
+        <li><a href="https://lightning.network" target="_blank">Lightning Network</a> - Off-chain BTC micropayment zaps</li>
+        <li><a href="https://docs.ipfs.tech/" target="_blank">IPFS & Filecoin</a> - Onchain cloud storage and mirroring</li>
+        <li><a href="https://arweave.org" target="_blank">Arweave + AO</a> - Permanent storage and compute</li>
+      </ul>
+    </section>
+
+    <section class="tool-category">
+      <h3>{t('tools.cat.privacy')}</h3>
+      <ul>
+        <li><a href="https://librewolf.net/" target="_blank">LibreWolf</a> / <a href="https://searx.space/" target="_blank">SearXNG</a> - Community-driven privacy browser and meta-search</li>
+        <li><a href="https://joinmastodon.org/" target="_blank">Mastodon</a> - Federated social alternatives (EU Non-profit)</li>
+        <li><a href="https://simplex.chat/" target="_blank">SimpleX Chat</a> - Decentralized, metadata-free communications</li>
+        <li><a href="https://www.globaleaks.org/" target="_blank">GlobaLeaks</a> - Open-source secure whistleblowing framework (EU)</li>
+      </ul>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .tools-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .tools-header h2 {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .tools-header p {
+    color: #a3a3a3;
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+  }
+  .tool-category {
+    background: #111;
+    border: 1px solid #222;
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+  .tool-category h3 {
+    color: #fff;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+  }
+  .tool-category ul {
+    list-style: none;
+  }
+  .tool-category li {
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    color: #888;
+  }
+  .tool-category a {
+    color: var(--accent);
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .tool-category a:hover {
+    text-decoration: underline;
+  }
+</style>

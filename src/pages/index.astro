@@ -8,35 +8,29 @@ const t = useTranslations(lang as any);
 
 <Layout>
   <section class="hero">
-    <h2>痛打落水狗</h2>
-    <p>
-      <em>"beat the dog that has fallen into the water"</em> — show no mercy to systems that are already collapsing.
+    <h2 class="title-logo">痛打落水狗</h2>
+    <p class="quote">
+      <em>{t('hero.quote')}</em>
     </p>
-    <p>
-      Welcome to the <strong>De-dollarization & Resilience Web App Hub</strong>. 
-      This platform serves creators, NGOs, and SMEs in BRICS+ and emerging markets.
+    <p class="welcome">
+      {t('hero.welcome')}
     </p>
   </section>
 
   <section class="features">
     <div class="card">
-      <h3>Resilience & Preservation</h3>
-      <p>IPFS + Filecoin Onchain Cloud mirroring. Pay once, store forever with Arweave.</p>
+      <h3>{t('feature1.title')}</h3>
+      <p>{t('feature1.desc')}</p>
     </div>
     <div class="card">
-      <h3>De-dollarized Rails</h3>
-      <p>x402 Foundation micro-payments, BRICS Pay integration, and Lightning Network zaps.</p>
+      <h3>{t('feature2.title')}</h3>
+      <p>{t('feature2.desc')}</p>
     </div>
     <div class="card">
-      <h3>Emerging Markets UX</h3>
-      <p>Low-bandwidth optimized, PWA offline cache, and 11-language native support.</p>
+      <h3>{t('feature3.title')}</h3>
+      <p>{t('feature3.desc')}</p>
     </div>
   </section>
-
-  <!-- Vecchio canvas placeholder -->
-  <div id="canvas-container" style="margin-top: 2rem; border: 1px dashed #333; padding: 1rem; text-align: center;">
-    <p>[Canvas Background / Animation Layer verrà re-integrato qui]</p>
-  </div>
 </Layout>
 
 <style>
@@ -44,14 +38,22 @@ const t = useTranslations(lang as any);
     text-align: center;
     margin-bottom: 3rem;
   }
-  .hero h2 {
-    font-size: 2.5rem;
+  .title-logo {
+    font-size: 3.5rem;
     margin-bottom: 1rem;
     color: var(--accent);
+    letter-spacing: 0.1em;
   }
-  .hero p {
+  .hero .quote {
     font-size: 1.2rem;
     color: #a3a3a3;
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+  }
+  .hero .welcome {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #e5e5e5;
     max-width: 800px;
     margin: 0 auto 1rem;
   }

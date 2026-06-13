@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n/ui';
+import CanvasBackground from './CanvasBackground.astro';
 
 interface Props {
 	title?: string;
@@ -25,6 +26,8 @@ const dir = lang === 'ar' ? 'rtl' : 'ltr';
 		<meta name="description" content={pageDesc} />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0a0a0a" />
 		<title>{pageTitle}</title>
     <style is:global>
       /* Stili base ispirati al vecchio index.html ma resi robusti per il layout documentale */
@@ -75,7 +78,13 @@ const dir = lang === 'ar' ? 'rtl' : 'ltr';
 	</head>
 	<body>
     <header>
-      <h1>{pageTitle}</h1>
+      <div class="header-left">
+        <h1><a href={`/${lang === 'en' ? '' : lang + '/'}`}>{pageTitle}</a></h1>
+        <nav class="main-nav">
+          <a href={`/${lang === 'en' ? '' : lang + '/'}`}>{t('nav.home')}</a>
+          <a href={`/${lang === 'en' ? 'tools' : lang + '/tools'}`}>{t('nav.tools')}</a>
+        </nav>
+      </div>
       <nav class="lang-switcher">
         <a href="/">EN</a>
         <a href="/it/">IT</a>
@@ -88,5 +97,16 @@ const dir = lang === 'ar' ? 'rtl' : 'ltr';
 		<main>
 			<slot />
 		</main>
+    <CanvasBackground />
+    <script>
+      // Semplice registrazione Service Worker per PWA Offline
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(error => {
+            console.error('ServiceWorker registration failed:', error);
+          });
+        });
+      }
+    </script>
 	</body>
 </html>

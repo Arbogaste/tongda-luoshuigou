@@ -6,7 +6,7 @@
 
 ## Vision & Architecture (2026 Update)
 
-The project has been migrated to an **Astro + Cloudflare** static-first architecture. It is designed to be a living system that publishes itself on permanent storage and guarantees 100+ years of permanence while supporting machine-to-machine enterprise-grade payments.
+The project has been migrated to an **Astro** static-first architecture. It is designed to be a living system that publishes itself on permanent storage and guarantees 100+ years of permanence while supporting machine-to-machine enterprise-grade payments.
 
 ### Key Pillars
 
@@ -23,12 +23,12 @@ The project has been migrated to an **Astro + Cloudflare** static-first architec
 3. **Country Intelligence & Offline-First UX**
    - **ResiScore:** A dynamic widget evaluating storage permanence, payment rails, censorship risk, and connectivity for emerging markets.
    - **PWA Offline Cache:** Extreme low-bandwidth mode ensuring the entire hub loads in under 80 KB.
-   - **Multi-language Support:** 11 built-in languages with edge-based localization.
+   - **Multi-language Support:** 11 built-in languages with static localization.
 
 ## Tech Stack
 
 - **Framework:** Astro 5
-- **Deployment:** Cloudflare Pages & Workers (with built-in x402 support)
+- **Deployment:** Fully decentralized (IPFS, Arweave, Filecoin)
 - **Content:** MDX / Markdown
 - **Search:** Pagefind (client-side, zero-server)
 - **Decentralization:** IPFS, Filecoin, Arweave, Nostr
